@@ -25,6 +25,13 @@ stages:
         npm install
       displayName: 'npm install'
 
+- stage: Test
+  jobs:
+  - job: RunTests
+    steps:
+    - script: npm test
+      displayName: 'Run Unit Tests'
+
 - stage: Build
   jobs:
   - job: Build
@@ -32,12 +39,3 @@ stages:
     steps:
     - script: npm run build
       displayName: 'npm run build'
-
-- stage: Test
-  jobs:
-  - job: RunTests
-    pool:
-      vmImage: 'your_local_agent'
-    steps:
-    - script: npm test
-      displayName: 'Run Unit Tests'
