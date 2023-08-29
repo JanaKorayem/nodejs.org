@@ -7,15 +7,34 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: MyAgentPool
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+stages:
+- stage: InstallDependencies
+  jobs:
+  - job: InstallDependencies
+    displayName: 'Install Node.js and Dependencies'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+    - script: npm install
+      displayName: 'npm install'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- stage: Build
+  jobs:
+  - job: Build
+    displayName: 'Build Application'
+    steps:
+    - script: npm run build
+      displayName: 'npm run build'
+
+- stage: Test
+  jobs:
+  - job: RunTests
+    pool:
+      vmImage: 'your_local_agent'
+    steps:
+    - script: npm test
+      displayName: 'Run Unit Tests'
