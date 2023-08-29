@@ -24,11 +24,7 @@ stages:
         npm remove package-lock.json
         npm install
       displayName: 'npm install'
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        customCommand: 'run generate-next-data'
-        
+
 - stage: Test
   jobs:
   - job: RunTests
