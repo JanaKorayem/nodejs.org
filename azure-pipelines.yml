@@ -46,9 +46,26 @@ stages:
 
 - stage: Dockerize
   jobs:
-    - job: BuildDockerImage
-      steps:
-        - script: 
-            docker build -t project-app .
-            docker push janakorayem/my-project-app
-          displayName: 'Build and Push Docker Image'
+  - job: BuildDockerImage
+    steps:
+    - script: 
+        docker build -t project-app .
+         docker push janakorayem/my-project-app
+      displayName: 'Build and Push Docker Image'
+
+- stage: DeployToAWS
+  jobs:
+  - job: Deploy
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+         versionSpec: '3.x'
+         addToPath: true
+    - script: 
+       ssh -i "projectt.pem" ubuntu@ec2-52-204-236-242.compute-1.amazonaws.com 'bash -s' < ./scripts/deploy.sh
+    displayName: 'Deploy to AWS EC2 Instance'
+
+
+
+
+
