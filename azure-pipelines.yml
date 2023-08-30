@@ -49,7 +49,7 @@ stages:
   - job: BuildDockerImage
     steps:
     - script: 
-        docker build -t project-app .
+        docker build -t janakorayem/my-project-app:latest .
         docker tag project-app janakorayem/my-project-app:latest
         docker push janakorayem/myproject:project-app
       displayName: 'Build and Push Docker Image'
