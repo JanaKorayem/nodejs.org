@@ -39,5 +39,7 @@ stages:
   - job: Build
     displayName: 'Build Application'
     steps:
-    - script: npm run build
+    - script: 
+        npm install --save-dev cross-env
+        npm run build
       displayName: 'npm run build'
