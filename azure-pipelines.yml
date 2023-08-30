@@ -31,7 +31,7 @@ stages:
     steps:
     - script: 
         npm install --save-dev cross-env
-        npm run test:unit
+        npm run test
       displayName: 'Run Unit Tests'
 
 - stage: Build
