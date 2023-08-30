@@ -29,7 +29,9 @@ stages:
   jobs:
   - job: RunTests
     steps:
-    - script: npm run test:unit
+    - script: 
+        npm install --save-dev cross-env
+        npm run test:unit
       displayName: 'Run Unit Tests'
 
 - stage: Build
