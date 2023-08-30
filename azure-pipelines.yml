@@ -29,7 +29,7 @@ stages:
   jobs:
   - job: RunTests
     steps:
-    - script: npm run test
+    - script: npm run test:unit
       displayName: 'Run Unit Tests'
 
 - stage: Build
